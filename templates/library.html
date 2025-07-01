@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Navbar Example</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #007BFF;
+      padding: 10px 20px;
+      color: white;
+    }
+
+    .navbar img {
+      margin-right: 15px;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .navbar-right a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+
+    .navbar-right a:hover {
+      text-decoration: underline;
+    }
+
+    .intro-section {
+      padding: 30px 20px;
+      background-color: #f8f9fa;
+      text-align: center;
+    }
+
+    .intro-section h1 {
+      color: #007BFF;
+      margin-bottom: 10px;
+    }
+
+    .intro-section p {
+      font-size: 18px;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="{% static 'book.png' %}" alt="book" width="40" height="40">
+      Lumbini ICT Campus Library
+    </div>
+    <div class="navbar-right">
+      <a href="#">Admin Panel</a>
+      <a href="#">Upload Books</a>
+    </div>
+  </div>
+
+  <div class="intro-section">
+    <h1>Empowering Minds, Enriching Futures</h1>
+    <p>
+      Welcome to <strong>Lumbini ICT Campus</strong>, where innovation meets education. 
+      As a leading institution in information and communication technology, we are committed to 
+      nurturing talent, fostering creativity, and preparing students for a dynamic digital world.
+    </p>
+  </div>
+
+</body>
+</html>
+

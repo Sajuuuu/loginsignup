@@ -34,12 +34,13 @@ def loginpage(request):
             login(request,user)
             return redirect('home')
         else:
-            return HttpResponse("Username or pssword is incorrect") 
+            return HttpResponse("Username or password is incorrect") 
         
     return render(request,'login.html')
 
 
 def homepage(request):
     return render(request,'home.html')
+
     
 
