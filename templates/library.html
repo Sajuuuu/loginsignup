@@ -1,87 +1,71 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Navbar Example</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #007BFF;
-      padding: 10px 20px;
-      color: white;
-    }
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
 
-    .navbar img {
-      margin-right: 15px;
-    }
+    <title>{% block title %}Home - Lumbini ICT Campus{% endblock %}</title>
+  </head>
+  <body>
 
-    .navbar-left {
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      font-size: 18px;
-    }
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'library' %}">
+        <img src="{% static 'book1.png' %}" alt="Book Logo" width="40" height="40" class="mr-2">
+        <span class="h5 mb-0">Lumbini ICT Campus Library</span>
+      </a>
 
-    .navbar-right a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 16px;
-    }
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    .navbar-right a:hover {
-      text-decoration: underline;
-    }
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto align-items-lg-center">
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin Dashboard</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#">Upload New Books</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <span class="navbar-text text-white ml-3">
+          Welcome, {{ user.username }}!
+        </span>
+        {% endif %}
+      </div>
+    </nav>
 
-    .intro-section {
-      padding: 30px 20px;
-      background-color: #f8f9fa;
-      text-align: center;
-    }
+    <!-- Main Content -->
+    {% block content %}
+    <div class="container my-5">
+      <div class="text-center mb-4">
+        <h2 class="font-weight-bold">Welcome to Lumbini ICT Campus</h2>
+        <h5 class="text-muted">A Premier Destination for CSIT Education in Nepal</h5>
+        <p class="mt-3 font-italic">"Empowering Minds, Enriching Futures"</p>
+      </div>
 
-    .intro-section h1 {
-      color: #007BFF;
-      margin-bottom: 10px;
-    }
-
-    .intro-section p {
-      font-size: 18px;
-      color: #333;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="navbar">
-    <div class="navbar-left">
-      <img src="{% static 'book.png' %}" alt="book" width="40" height="40">
-      Lumbini ICT Campus Library
+      <p class="lead text-justify">
+        At <strong>Lumbini ICT Campus</strong>, we blend technology and education to shape the leaders of tomorrow.
+        As one of Nepal’s top institutions for Information and Communication Technology, we are dedicated to academic excellence,
+        innovation, and career-focused learning. Join us and unlock your full potential in a digital world.
+      </p>
     </div>
-    <div class="navbar-right">
-      <a href="#">Admin Panel</a>
-      <a href="#">Upload Books</a>
-    </div>
-  </div>
+    {% endblock %}
 
-  <div class="intro-section">
-    <h1>Empowering Minds, Enriching Futures</h1>
-    <p>
-      Welcome to <strong>Lumbini ICT Campus</strong>, where innovation meets education. 
-      As a leading institution in information and communication technology, we are committed to 
-      nurturing talent, fostering creativity, and preparing students for a dynamic digital world.
-    </p>
-  </div>
-
-</body>
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
 </html>
-
+ 

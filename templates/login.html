@@ -157,6 +157,9 @@ button{
           <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
         </div> -->
         <a href="{% url 'signup' %}" >Create an account</a>
+         {% if error_message %}
+             <p style="color:red;">{{ error_message }}</p>
+        {% endif %}
     </form>
 </body>
 </html>
