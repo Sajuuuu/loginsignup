@@ -1,0 +1,16 @@
+{% extends 'library.html' %}
+{% block content %}
+<center>
+    <form method ="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="w-50 table table-light" style="border-radius: 10px;">
+
+            <tr>
+                <th> Field Label </th>
+                <td> Field </td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-lng btn-success md-5">Upload</button>
+    </form>
+</center>
+{% endblock %}

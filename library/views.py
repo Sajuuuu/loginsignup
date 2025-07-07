@@ -8,3 +8,5 @@ def librarypage(request):
     user = request.useer
     return render(request,'library.html',{'user':user})
 
+def uploadform(request):
+    return render(request,'uploadform.html')
