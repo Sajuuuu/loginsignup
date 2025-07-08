@@ -50,9 +50,9 @@ def loginpage(request):
 def homepage(request):
     return render(request,'home.html')
 
-@login_required(login_url='login')
-def library(request):
-    return render (request,'library.html' )
+# @login_required(login_url='login')
+# def library(request):
+#     return render (request,'library.html' )
 
 def logoutpage(request):
     logout(request)
