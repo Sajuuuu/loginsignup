@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Book
 from .forms import BookCreate
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 # Create your views here.
@@ -46,3 +48,21 @@ def delete_book(request,book_id):
         return redirect('library')
     book_shelf.delete()
     return redirect('library')
+
+def send_template_email(request):
+    if request.method == "POST":
+        # Get values from model form
+        from_email = settings.EMAIL_HOST_USER
+        to_email=  request.POST['to_email']
+        subject = request.POST['subject']
+        body = request.POST['body']
+
+
+        # Send the email
+        try:
+            send_mail(subject, body, from_email, [to_email])
+            return render(request, 'new.html', {'message': 'Email sent successfully!'})
+        except Exception as e:
+            return render(request, 'new.html', {'message': f'Failed to send email: {e}'})
+    else:
+        return redirect('library')

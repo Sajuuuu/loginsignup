@@ -9,7 +9,7 @@ urlpatterns =[
     path('uploadform',views.uploadform,name='uploadform'),
     path('update/<int:book_id>',views.update_book),
     path('delete/<int:book_id>',views.delete_book),
-
+    path('email',views.send_template_email,name='email')
 
 
 ]
