@@ -137,12 +137,12 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="", cast=str)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 # Folder where collected static files will be stored
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,"static")]
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static.files')
+STATIC_ROOT = os.path.join(BASE_DIR,'static files')
 MEDIA_URL ='media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 

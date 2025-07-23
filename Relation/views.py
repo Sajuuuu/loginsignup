@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect
 from .forms import PublisherForm
+from .models import Book
 
 # Create your views here.
 
 def booklist(request):
-    return render (request,'relation/booklist.html')
+    books =Book.object.all()
+    return render (request,'relation/booklist.html',{'books': books})
 
 def addpublisher(request):
     if request.method == "POST":
