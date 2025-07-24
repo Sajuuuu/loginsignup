@@ -5,7 +5,7 @@ from .models import Book
 # Create your views here.
 
 def booklist(request):
-    books =Book.object.all()
+    books =Book.objects.all()
     return render (request,'relation/booklist.html',{'books': books})
 
 def addpublisher(request):
