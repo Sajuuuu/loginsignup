@@ -27,13 +27,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto align-items-lg-center">
           <li class="nav-item mx-2">
-            <a class="nav-link" href="{% url 'admin:index' %}">Add Publisher</a>
+            <a class="nav-link" href="{% url 'addpublisher' %}">Add Publisher</a>
           </li>
           <li class="nav-item mx-2">
-            <a class="nav-link" href="{% url 'uploadform' %}">Add Author</a>
+            <a class="nav-link" href="{% url 'addauthor' %}">Add Author</a>
           </li>
              <li class="nav-item mx-2">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#emailModal">
+            <a class="nav-link" href="{% url 'addbook' %}" >
                 Add Book
                  </a>
             </li>
@@ -51,40 +51,39 @@
     </nav>
 
     <!-- Main Content -->
-    {% block content %}
-    <div class="container my-5">
-      <div class="text-center mb-5">
-        <h2 class="font-weight-bold">Welcome to Lumbini ICT Campus Library</h2>
-        <h5 class="text-muted">Inspiring Excellence in Information & Communication Technology</h5>
-        <p class="mt-3 font-italic text-primary">"Empowering Minds, Enriching Futures"</p>
-      </div>
+ {% block content %}
+<h1 class="text-center my-4">Book List</h1>
 
-      <p class="lead text-justify">
-        At <strong>Lumbini ICT Campus</strong>, we merge technology and education to build the next generation of ICT leaders.
-        As a top institution in Nepal, we are committed to academic excellence, innovation, and industry-oriented learning.
-        Join us to unlock your potential in a rapidly evolving digital world.
-      </p>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for book in books %}
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+           
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ book.title }}</h5>
 
-      <div class="card-columns mt-5">
-        {% for book in book_shelf %}
-        <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="{{book.picture.url}}" alt="Image">
-          <div class="card-body">
-            <h5 class="card-title">{{book.name}}</h5>
-            <p class="card-text">{{book.description}}</p>
-            <div class="card-footer bg-transparent border-dark">
-              <p class="card-title mb-2">{{book.author}}</p>
-              <center>
-                <a href="update/{{ book.id }}" class="btn btn-sm btn-primary"id="{{ book.id }}">Edit</a>
-                <a href="delete/{{ book.id }}" class="btn btn-sm btn-danger"id="{{ book.id }}">Delete</a>
-              </center>
+            <h6 class="card-subtitle mb-2 text-muted">
+              By
+              {% for author in book.authors.all %}
+                {{ author.first_name }} {{ author.last_name }}{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </h6>
+
+            <p class="card-text mt-2 mb-4">
+              <strong>Publisher:</strong> {{ book.publisher.name }}
+            </p>
+
+            <div class="mt-auto">
+              <a href="{% url 'book_details' book.id %}" class="btn btn-primary btn-sm w-100">More Details</a>
             </div>
           </div>
         </div>
-        {% endfor %}
       </div>
-    </div>
-    {% endblock %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
 
     <!-- Optional JavaScript -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

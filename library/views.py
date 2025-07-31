@@ -66,3 +66,5 @@ def send_template_email(request):
             return render(request, 'new.html', {'message': f'Failed to send email: {e}'})
     else:
         return redirect('library')
+    
+    

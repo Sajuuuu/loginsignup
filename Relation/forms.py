@@ -18,7 +18,7 @@ class AuthorForm(forms.ModelForm):
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book 
-        fields = ['title','isbn','published_date','publisher','authors']
+        fields = ['title','image','isbn','published_date','publisher','authors']
         widgets = {
             'published_date': forms.DateInput(attrs={'type':'date'}),
             'authors': forms.CheckboxSelectMultiple(),
