@@ -1,10 +1,113 @@
 {% extends 'relation/booklist.html' %}
-
+{% load static %}
 {% block title %}Book Details{% endblock %}
 
 {% block content %}
 <div class="container at-4">
     <h2 class="mb-4">{{ book.title }}</h2>
+
+
+<div class="text-center mb-4">
+    {% if book.image %}
+    <img src="{{ book.image.url }}" class="img-fluid rounded shadow" alt="{{ book.title }}" style="max-height:400px;">
+    {% else %}
+    <img src="{% static 'book.jpg' %}" class="img-fluid rounded shadow" alt="Default" style="max-height: 400px;">
+    {% endif %}
 </div>
+
+<div class="card mb-4 shadow">
+    <div class="card-body">
+        <h4 class="card-title">Book Information</h4>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Title</strong>{{ book.title }}</li>
+            <li class="list-group-item"><strong>ISBN</strong>{{ book.isbn }}</li>
+            <li class="list-group-item"><strong>Publishing Date:</strong>{{ book.published_date }}</li>
+        </ul>
+    </div>
+</div>
+
+
+
+<div class="card mb-4 shadow">
+    <div class="card-body">
+        <h4 class="card-title">Publisher Information</h4>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Name:</strong>{{ book.publisher.name }}</li>
+            <li class="list-group-item"><strong>Address:</strong>{{ book.publisher.address }}</li>
+            <li class="list-group-item"><strong>City:</strong>{{ book.publisher.city }}</li>
+            <li class="list-group-item"><strong>Country:</strong>{{ book.publisher.country }}</li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="card mb-4 shadow">
+    <div class="card-body">
+        <h4 class="card-title">Author Information</h4>
+        <ul class="list-group list-group-flush">
+            {% for author in book.authors.all %}
+            <li class="list-group-item">
+                {{ author.first_name }} {{ author.last_name }} ({{ author.email }})
+        
+            </li>
+            {% empty %}
+            <li class="list-group-item">No authors listed.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="text-color">
+    <button id="payment-button" class="btn btn-lg text-white" style="background-color: blue;">
+        Buy with Khalti
+    </button>
+</div> <br>
+<a href="{% url 'booklist' %}" class="btn btn-secondary at-4">Back To Book List</a>
+
+</div>
+  <!-- Include khalti -->
+<script src="https://khalti.com/static/khalti-checkout.js"></script>
+<script>
+    var config = {
+        publicKey: "your_public_key",  // Replace with your actual public key
+        productIdentity: "unique_product_id",
+        productName: "Your Product Name",
+        productUrl: "https://your-website.com/product-url",
+        paymentPreference: ["KHALTI", "EBANKING", "MOBILE_BANKING"],
+        eventHandler: {
+            onSuccess: function (payload) {
+                fetch("/verify-khalti-payment", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify(payload)
+                }).then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          alert("Payment Successful!");
+                      } else {
+                          alert("Payment Failed");
+                      }
+                  }).catch(err => {
+                      console.error("Verification error:", err);
+                      alert("Verification error occurred.");
+                  });
+            },
+            onError: function (error) {
+                alert("Payment error: " + error);
+            },
+            onClose: function () {
+                console.log("Widget is closed");
+            }
+        }
+    };
+
+    var checkout = new KhaltiCheckout(config);
+    document.getElementById("payment-button").onclick = function () {
+        checkout.show({ amount: 50000 }); // Amount in paisa (e.g. Rs. 500 = 50000 paisa)
+    };
+</script>
 
 {% endblock %}
